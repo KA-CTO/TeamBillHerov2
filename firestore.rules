@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // One DB, many shops. A signed-in user can read/write only their own
+    // shop document AND everything under it (inventory, sales, customers,
+    // orders, rollups) — true multi-tenant isolation at every level.
+    match /shops/{shopId} {
+      allow read, write: if request.auth != null && request.auth.uid == shopId;
+      match /{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == shopId;
+      }
+    }
+  }
+}

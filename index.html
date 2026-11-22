@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#3b5bdb" />
+  <title>BillHero — Smart Billing</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
+  <!-- ============ AUTH / ONBOARDING ============ -->
+  <div id="auth">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <span class="auth-mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 2-4h16l2 4"/><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"/><path d="M2 7h20"/><path d="M12 7v14"/></svg>
+        </span>
+        <b>BillHero</b>
+      </div>
+      <p class="auth-sub">Smart billing, stock &amp; customers for your shop.</p>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin">Login</button>
+        <button class="auth-tab" id="tabSignup">Create shop</button>
+      </div>
+
+      <!-- Login -->
+      <form id="loginForm">
+        <div class="field"><label>Email</label><input id="liEmail" type="email" placeholder="you@shop.com" autocomplete="username" /></div>
+        <div class="field"><label>Password</label><input id="liPass" type="password" placeholder="••••••••" autocomplete="current-password" /></div>
+        <button class="auth-btn" type="submit">Login</button>
+      </form>
+
+      <!-- Signup / onboarding -->
+      <form id="signupForm" class="hide">
+        <div class="field"><label>Shop name</label><input id="suShop" placeholder="Sharma General Store" /></div>
+        <div class="field"><label>Owner name</label><input id="suOwner" placeholder="Your name" /></div>
+        <div class="field"><label>City</label><input id="suCity" placeholder="Ranchi" /></div>
+        <div class="field"><label>Email</label><input id="suEmail" type="email" placeholder="you@shop.com" autocomplete="username" /></div>
+        <div class="field"><label>Password</label><input id="suPass" type="password" placeholder="At least 6 characters" autocomplete="new-password" /></div>
+        <button class="auth-btn" type="submit">Create shop</button>
+      </form>
+
+      <p class="auth-err" id="authErr"></p>
+      <p class="auth-foot" id="authFoot">One account = one shop. Your data is private to you.</p>
+    </div>
+  </div>
+
+  <!-- ============ ONBOARDING: ADD PRODUCTS ============ -->
+  <div id="onboard" class="hide">
+    <div class="onb-card">
+      <div class="auth-brand">
+        <span class="auth-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>
+        <b>Set up your products</b>
+      </div>
+      <p class="auth-sub" id="onbSub">Pick the easiest way — you can edit anytime later.</p>
+
+      <div id="onbChoices">
+        <button class="onb-opt" data-act="starter">
+          <span class="onb-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>
+          <div><b>Start with common items</b><small>Ready-made kirana catalog — fastest</small></div>
+        </button>
+        <button class="onb-opt" data-act="csv">
+          <span class="onb-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg></span>
+          <div><b>Import from another app</b><small>Vyapar, myBillBook, Khatabook — upload CSV</small></div>
+        </button>
+        <button class="onb-opt" data-act="paste">
+          <span class="onb-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+          <div><b>Paste your product list</b><small>From notes, Excel, anywhere</small></div>
+        </button>
+        <button class="onb-opt" data-act="photo">
+          <span class="onb-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3"/></svg></span>
+          <div><b>Scan a photo of your list</b><small>AI reads handwriting for you</small></div>
+        </button>
+      </div>
+
+      <div id="onbPanel" class="hide"></div>
+      <button class="ghost-btn" id="onbSkip">Skip for now</button>
+      <input type="file" id="onbFile" hidden />
+    </div>
+  </div>
+
+  <!-- ============ APP ============ -->
+  <div id="app" class="hide">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 2-4h16l2 4"/><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"/><path d="M2 7h20"/><path d="M12 7v14"/></svg>
+        </div>
+        <div class="brand-text">
+          <strong>BillHero</strong>
+          <span id="storeName">My Shop</span>
+        </div>
+      </div>
+      <div class="top-right">
+        <select id="langSel" class="lang-sel" aria-label="Language"></select>
+        <div class="ai-pill" id="aiPill" title="Status"><span class="dot" id="aiDot"></span><span id="aiLabel">Offline</span></div>
+        <button class="icon-mini" id="chatsBtn" title="Chats" aria-label="Chats">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+        </button>
+        <button class="icon-mini" id="addBtn" title="Add product" aria-label="Add product">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+        </button>
+        <button class="icon-mini" id="logoutBtn" title="Logout" aria-label="Logout">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat"><span class="stat-val" id="statSales">₹0</span><span class="stat-label">Today's Sale</span></div>
+      <div class="stat"><span class="stat-val" id="statBills">0</span><span class="stat-label">Today's Bills</span></div>
+      <div class="stat"><span class="stat-val" id="statLow">0</span><span class="stat-label">Low Stock</span></div>
+    </section>
+
+    <main class="chat" id="chat" aria-live="polite"></main>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <button type="button" class="icon-btn" id="camBtn" title="Scan photo list" aria-label="Scan photo list">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3"/></svg>
+      </button>
+      <button type="button" class="icon-btn" id="micBtn" title="Voice input" aria-label="Voice input">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      </button>
+      <input id="input" type="text" placeholder="Ask anything, or type a sale…" autocomplete="off" />
+      <button type="submit" class="send-btn" aria-label="Send">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+      </button>
+      <input type="file" id="fileInput" accept="image/*" capture="environment" hidden />
+    </form>
+
+    <div class="voice-tip" id="voiceTip">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      Press &amp; hold the mic to speak
+    </div>
+
+    <div class="hints" id="hints">
+      <button class="hint">2 Parle-G, 1 Maggi bika</button>
+      <button class="hint">aaj kitna becha?</button>
+      <button class="hint">kya khatam hone wala hai?</button>
+      <button class="hint">is hafte ka hisab</button>
+      <button class="hint">stock dikhao</button>
+    </div>
+  </div>
+
+  <script src="secrets.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script type="module" src="db.js"></script>
+  <script>
+    // DEV MODE: service worker OFF so code is always fresh (no manual cache-clear,
+    // no stale-config bugs). Unregister any old SW + delete its caches once.
+    // Re-enable a proper auto-updating SW at final deploy (see sw.js) for offline/PWA.
+    if("serviceWorker" in navigator){
+      navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(()=>{});
+    }
+    if(window.caches){ caches.keys().then(ks => ks.forEach(k => caches.delete(k))).catch(()=>{}); }
+  </script>
+</body>
+</html>
